@@ -3,6 +3,8 @@ import cors from "cors";
 import express from "express";
 import session from "express-session";
 import { accounts, sessionCookieName } from "./Kambaz/account";
+import { assignments } from "./Kambaz/assignments";
+import { enrollments } from "./Kambaz/enrollments";
 import { courses, courseModules } from "./Kambaz/courses";
 import { lab5 } from "./Lab5/routes";
 
@@ -36,7 +38,7 @@ app.use("/api", session({
   cookie: { httpOnly: true, secure: production, sameSite: production ? "none" : "lax" },
 }));
 app.use("/api/users", accounts);
-app.use("/api", courses, courseModules);
+app.use("/api", courses, courseModules, assignments, enrollments);
 
 const port = Number(process.env.PORT ?? 4000);
 app.listen(port, () => console.log(`Express listening on port ${port}`));

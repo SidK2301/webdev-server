@@ -8,7 +8,7 @@ const courseFields = ["name", "number", "startDate", "endDate", "department", "d
 export const courses = Router();
 export const courseModules = Router();
 
-function findCourse(request: Request, response: Response) {
+export function findCourse(request: Request, response: Response) {
   const course = db.courses.find(({ _id }) => _id === request.params.courseId);
   if (!course) response.status(404).json({ error: "Course not found." });
   return course;
